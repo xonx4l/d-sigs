@@ -21,6 +21,8 @@ fn main() {
   };
 
   let serialized_message = serde_json::to_string(&message).unwrap();
+  
+  let serialized_message_clone = serialized_message.clone();
 
   let message = "die for none";
   let sig = private.sign(&serialized_message);
@@ -29,7 +31,7 @@ fn main() {
 
   println!("Is the message authentic? {}", verification);
 
-  let deserialized_message: Transaction = serde_json::from_str(&serialized_message).unwrap();
+  let deserialized_message: Transaction = serde_json::from_str(&serialized_message_clone).unwrap();
 
   println!("{}", deserialized_message.amount);  
 }
